@@ -1,21 +1,21 @@
-#---
+# ---
 # Excerpted from "Programming Ecto",
 # published by The Pragmatic Bookshelf.
 # Copyrights apply to this code. It may not be used to create training material,
 # courses, books, articles, and the like. Contact us if you are in doubt.
 # We make no guarantees that this code is fit for any purpose.
 # Visit https://pragprog.com/titles/wmecto for more book information.
-#---
+# ---
 defmodule MusicDB.SoloArtist do
   use Ecto.Schema
   import Ecto.Changeset
 
   embedded_schema do
-    field :name1, :string
-    field :name2, :string
-    field :name3, :string
-    field :birth_date, :date
-    field :death_date, :date
+    field(:name1, :string)
+    field(:name2, :string)
+    field(:name3, :string)
+    field(:birth_date, :date)
+    field(:death_date, :date)
   end
 
   def changeset(solo_artist, params) do
@@ -35,7 +35,6 @@ defmodule MusicDB.SoloArtist do
       "#{solo_artist.name1} #{solo_artist.name2} #{solo_artist.name3}"
       |> String.trim()
 
-    %{name: name, birth_date: solo_artist.birth_date,
-      death_date: solo_artist.death_date}
+    %{name: name, birth_date: solo_artist.birth_date, death_date: solo_artist.death_date}
   end
 end
