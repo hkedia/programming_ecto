@@ -1,11 +1,11 @@
-#---
+# ---
 # Excerpted from "Programming Ecto",
 # published by The Pragmatic Bookshelf.
 # Copyrights apply to this code. It may not be used to create training material,
 # courses, books, articles, and the like. Contact us if you are in doubt.
 # We make no guarantees that this code is fit for any purpose.
 # Visit https://pragprog.com/titles/wmecto for more book information.
-#---
+# ---
 ##############################################
 ## Ecto Playground
 #
@@ -38,10 +38,19 @@ defmodule Playground do
   end
 
   def play do
-    MusicDB.Repo.aggregate("artists", :count, :id)
+    artist = Repo.get_by(Artist, name: "Johnny Hodges")
+    artist_chageset = Artist.changeset(artist, %{name: "John Cornelius Hodges"})
+    genre_changeset =
+      %Genre{}
+      |> cast(%{name: "jazz"}, [:name])
+      |> unique_constraint(:name)
 
+    multi =
+      Multi.new
+      |> Multi.update(:artist, artist_chageset)
+      |> Multi.insert(:bad_genre, genre_changeset)
+    Repo.transaction(multi)
   end
-
 end
 
 # add your test code to Playground.play above - this will execute it
