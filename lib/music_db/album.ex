@@ -13,7 +13,6 @@ defmodule MusicDB.Album do
 
   schema "albums" do
     field(:title, :string)
-    field :last_viewed, MusicDb.DateTimeUnix
     timestamps()
 
     belongs_to(:artist, Artist)
